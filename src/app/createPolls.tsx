@@ -42,6 +42,29 @@ export default function CreatePolls() {
         setOptions(collections)
     }
 
+    const createPoll = async () => {
+        try {
+            const token = localStorage.getItem('token')
+            const url = 'http://localhost:3001/polls/createPoll'
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    question: question,
+                    options: options
+                })
+            });
+
+            const data= await response.json()
+            console.log(data)
+        } catch {
+            console.error();
+        }
+    }
+
     return (
         <div className="flex justify-center mt-[4rem]">
             <form className="flex flex-col gap-y-2">
@@ -49,8 +72,7 @@ export default function CreatePolls() {
                 {
                     options.map((_op, index) => {
                         const isActive = options.length <= 2;
-                        console.log(isActive)
-
+                        
                         return (
                             <div key={index} className="flex">
                                 <input name='content' className="w-[15rem] h-[2.1rem] bg-slate-500/25 rounded-s-md px-2 py-1" type="text" placeholder={`option ` + (index + 1)} value={_op.content} onChange={(e) => { handleInput(e, index) }} />
@@ -69,18 +91,18 @@ export default function CreatePolls() {
                     })
                 }
 
-                <button className={'bg-amber-300 text-amber-800 font-bold px-2 py-1 rounded-md delay-100 transition-all ease-in '+(!(options.length <= 5)? 'opacity-50 cursor-not-allowed':'hover:bg-amber-200')}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            if (options.length <= 5) {
-                                handleAddOption()
-                            }
-                        }}>Add option</button>
+                <button className={'bg-amber-300 text-amber-800 font-bold px-2 py-1 rounded-md delay-100 transition-all ease-in ' + (!(options.length <= 5) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-amber-200')}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        if (options.length <= 5) {
+                            handleAddOption()
+                        }
+                    }}>Add option</button>
 
                 <button className='bg-emerald-300 text-emerald-800 font-bold px-2 py-1 rounded-md hover:bg-emerald-200 delay-75 transition-all'
                     onClick={(e) => {
                         e.preventDefault()
-                        console.log(question, options)
+                        createPoll()
                     }}>Create Poll</button>
             </form>
 

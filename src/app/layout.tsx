@@ -1,8 +1,8 @@
-
+"use client"
 import Link from 'next/link'
 import './globals.css'
 import { Inter, Poppins } from 'next/font/google'
-import React, { Suspense } from "react";
+import React, { ReactNode, Suspense, forwardRef, Ref } from "react";
 import NavLink from './nav-link';
 import Loading from './loading';
 
@@ -12,7 +12,7 @@ const poppins = Poppins({
   display: 'swap',
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
 
     <html lang="en" className={poppins.className}>
@@ -25,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <NavLink href='/'>CreatePolls</NavLink>
               <NavLink href='/mypolls'>Polls</NavLink>
               <NavLink href='/Auth/login'>Login</NavLink>
+              {/* <Selector/> */}
             </div>
           </nav>
         </header>
@@ -40,3 +41,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+
+

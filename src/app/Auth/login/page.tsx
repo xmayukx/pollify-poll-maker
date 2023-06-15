@@ -31,21 +31,20 @@ export default function Login() {
         }
     }
 
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target
         setCred((preVal) => ({ ...preVal, [name]: value }))
     }
 
     return (
-        <div className="">
-            <p className="text-center mb-5 text-2xl">Login</p>
+        <div className="space-y-5 relative top-[3.5rem]">
+            <p className="text-center text-4xl font-bold">Login</p>
             <Suspense fallback={<Loading />} >
                 <form className="flex flex-col mx-20 lg:mx-[40rem] gap-2" autoComplete="off">
-                    <input className="rounded-sm text-black p-1" type="text" name="email" placeholder="email" autoComplete="off" onChange={handleChange} autoCorrect="off" />
-                    <input className="rounded-sm text-black p-1" type="password" name="password" placeholder="password" autoComplete="off" onChange={handleChange} />
+                    <input className="h-[2.1rem] bg-slate-500/25 rounded-md px-2 py-1" type="text" name="email" placeholder="email" autoComplete="off" onChange={handleChange}/>
+                    <input className="h-[2.1rem] bg-slate-500/25 rounded-md px-2 py-1" type="password" name="password" placeholder="password" autoComplete="off" onChange={handleChange} />
                     <p className='text-end text-xs'>Forgot Password?</p>
-                    <button className='bg-indigo-600 rounded-sm p-1'
+                    <button className='bg-indigo-400 hover:bg-indigo-300 rounded-lg p-1 text-indigo-800 font-bold'
                         onClick={async (event) => {
                             event.preventDefault();
                             await handleSubmit();
@@ -53,9 +52,7 @@ export default function Login() {
                         log in
                     </button>
                 </form>
-            
             </Suspense>
-
         </div>
     )
 }
